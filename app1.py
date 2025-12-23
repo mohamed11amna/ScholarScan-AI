@@ -1,4 +1,3 @@
-%%writefile app.py
 import streamlit as st
 import torch
 import os
@@ -245,3 +244,4 @@ if raw_text and len(raw_text) > 10:
 elif raw_text:
 
     st.warning("⚠️ Text is too short to summarize (Min 10 words).")
+

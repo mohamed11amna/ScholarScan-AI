@@ -1,11 +1,12 @@
 streamlit
 torch
-transformers
+transformers>=4.30.0
+sentencepiece
+accelerate
 pytesseract
 pdf2image
 python-docx
 reportlab
 gdown
 Pillow
-sentencepiece
-accelerate
+protobuf

@@ -1,0 +1,11 @@
+streamlit
+torch
+transformers
+pytesseract
+pdf2image
+python-docx
+reportlab
+gdown
+Pillow
+sentencepiece
+accelerate

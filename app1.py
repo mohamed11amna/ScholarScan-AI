@@ -15,7 +15,7 @@ from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 
-# --- 1. CONFIGURATION & SETUP ---
+# CONFIGURATION & SETUP
 st.set_page_config(page_title="ScholarScan AI", page_icon="📑", layout="wide")
 
 # Custom CSS for a better look
@@ -27,7 +27,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- 2. MODEL LOADING FUNCTIONS ---
+# MODEL LOADING FUNCTIONS
 @st.cache_resource
 def load_model():
     """Downloads model if missing, then loads it into memory."""
@@ -49,7 +49,7 @@ def load_model():
         st.error(f"Failed to load model: {e}")
         return None, None, None
 
-# --- 3. TEXT EXTRACTION FUNCTIONS ---
+# TEXT EXTRACTION FUNCTIONS
 def extract_from_pdf(file_bytes):
     """Converts PDF to Images then uses OCR."""
     with open("temp.pdf", "wb") as f:
@@ -81,7 +81,7 @@ def extract_from_image(file_obj):
     image = Image.open(file_obj)
     return pytesseract.image_to_string(image)
 
-# --- 4. SUMMARIZATION LOGIC ---
+# SUMMARIZATION LOGIC
 def chunk_text(text, limit=150):
     words = text.split()
     chunks = []
@@ -122,7 +122,7 @@ def summarize_text(text, tokenizer, model, device, chunk_size, beam_size):
         
     return summaries
 
-# --- 5. REPORT GENERATION ---
+# REPORT GENERATION
 def create_pdf(summaries):
     buffer = io.BytesIO()
     doc = SimpleDocTemplate(buffer, pagesize=letter)
@@ -159,7 +159,7 @@ def create_word(summaries):
     buffer.seek(0)
     return buffer
 
-# --- 6. MAIN UI ---
+# MAIN UI
 st.title("📑 ScholarScan AI")
 st.markdown("### Intelligent Document Summarization Pipeline")
 
@@ -210,7 +210,7 @@ if raw_text and len(raw_text) > 10:
             
         st.success("Summarization Complete!")
         
-        # --- RESULTS SECTION ---
+        # RESULTS SECTION
         col1, col2 = st.columns(2)
         
         # Column 1: Display Summary
@@ -243,4 +243,5 @@ if raw_text and len(raw_text) > 10:
             )
 
 elif raw_text:
+
     st.warning("⚠️ Text is too short to summarize (Min 10 words).")
